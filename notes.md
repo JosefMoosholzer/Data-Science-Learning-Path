@@ -94,24 +94,24 @@ def generator_odd_pairs(n):
         x += 2
 ```
 This code will execute immediately because none of the generators will actually produce something, as they were never used.
-But more importantly, the second generator is more than 5.000 times more time-efficient than a list.
+But more importantly, the second generator is about 4.000 times more time-efficient than a list, when it comes to generating 25 million tuples.
 
 ```python
 from time import perf_counter
 
 # List comprehension
 tic = perf_counter()
-for x,y in [(x,y) for x in range(10000) if x%2==0 for y in range(10000) if y%2==0]:
+for x,y in [(x,y) for x in range(0, 10000, 2) for y in range(0, 10000, 2)]:
     sum_of_both = x+y
 toc = perf_counter()
-print(toc-tic) # Just over 7 seconds
+print(toc-tic) # Around 5 seconds
 
 # Generator with comprehension
 tic = perf_counter()
-for x,y in ((x,y) for x in range(10000) if x%2==0 for y in range(10000) if y%2==0):
+for x,y in ((x,y) for x in range(0, 10000, 2) for y in range(0, 10000, 2)):
     sum_of_both = x+y
 toc = perf_counter()
-print(toc-tic) # Somewhere around 6 seconds
+print(toc-tic) # Less than 4 seconds
 
 # Generator with yield
 tic = perf_counter()
@@ -126,7 +126,7 @@ def generator_odd_pairs(n):
 for x,y in generator_odd_pairs(10000):
     sum_of_both = x+y
 toc = perf_counter()
-print(toc-tic) # Consistently less than 0.0013 seconds
+print(toc-tic) # Consistently less than 0.00125 seconds
 ```
 
 # args and kwargs, zip and unpacking
