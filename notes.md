@@ -130,8 +130,57 @@ print(toc-tic) # Consistently less than 0.00125 seconds
 ```
 
 # args and kwargs, zip and unpacking
+Writing a function on a higher level of abstraction, which takes another function f as one of its arguments and returns a new arguments as a result, calls for the use of *args and **kwargs in case that the function f requires an unforeseen amount of arguments.
+```python
+def doubler(f):
+    def g(*args, **kwargs):
+        return 2 * f(*args, **kwargs)
+    return g
 
+def f1():
+    return 10
+def f2(a, b):
+    return a + b
+def f3(a,b,c=1):
+    return a*b*c
+g1 = doubler(f1)
+g2 = doubler(f2)
+g3 = doubler(f3)
+
+assert g1() == 20 # 10 * 2
+assert g2(3,5) == 16 # (3 + 5) * 2
+assert g3(1,2,3) == 12 # (1 * 2 * 3) * 2
+```
+The function created by the abstract function, passes down all arguments (args) and keyword-arguments (kwargs) given to the initial function and unpacks them with the * and ** operand, respectively.
+
+Just like iterables can be zipped together with the zip-function, an iterable can be unpacked into its elements with the * operand. In order to reverse a zip, one has to write the following.
+
+```python
+nums = (1, 2, 3)
+squares = (1, 4, 9)
+
+square_tuples = [pair for pair in zip(nums, squares)]
+nums2, squares2 = zip(*square_tuples)
+
+assert nums2 == nums
+assert squares2 == squares
+```
+Note that this unzipping method returned tuples
 
 # Regular expressions
+Regular expressions help to look for patterns in a word or text. There are many methods but some of them are:
+```python
+import re as regex # I don't like the abbreviation "re", as it can be easily overlooked or overwritten
+
+assert not regex.match("a", "cat") # Match starts looking at the beginning
+assert regex.search("a", "cat") # Search searches anywhere in the string
+assert not regex.search("c", "dog")
+
+# Anything in brackets is a set of characters, any single character in a set becomes a search criteria
+assert len(regex.split("[ab]", "carbs")) == 3 # Splits at every occasion
+assert regex.sub("[el]", "o", "Hello") == "Hoooo" # Substitutes at every occasion
+```
+
+
 
 # Other

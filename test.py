@@ -1,21 +1,9 @@
-from time import perf_counter
 
+import re as regex # I don't like the abbreviation "re", as it can be easily overlooked or overwritten
 
-# Generator with comprehension
-
-
-# Generator with yield
-for _ in range(5):
-    tic = perf_counter()
-    def generator_odd_pairs(n):
-        x,y = 0,0
-        while x < n:
-            while y < n:
-                yield x,y
-                y += 2
-            x += 2
-
-    for x,y in generator_odd_pairs(10000):
-        sum_of_both = x+y
-    toc = perf_counter()
-    print(toc-tic) # Consistently less than 0.0013 seconds
+assert not regex.match("a", "cat") # Match starts looking at the beginning
+assert regex.search("a", "cat") # Search searches anywhere in the string
+assert not regex.search("c", "dog")
+# Anything in brackets is a set of characters, any single character in a set becomes a search criteria
+assert len(regex.split("[ab]", "carbs")) == 3 # Splits at every occasion
+assert regex.sub("[el]", "o", "Hello") == "Hoooo" # Substitutes at every occasion
