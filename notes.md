@@ -1,5 +1,5 @@
 # Overview
-1. [Pythonesk](#pythonesk)
+1. [Pythonic](#pythonesk)
 2. [Automated tests](#automated-tests)
 3. [List comprehensions](#list-comprehensions)
 4. [Iterables and generators](#iterables-and-generators)
