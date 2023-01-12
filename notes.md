@@ -76,8 +76,60 @@ Each loop can access the iterating variables of any preceding loop. Conditions i
 ```python
 even_pairs = [(x,y) for x in range(10000) if x%2==0 for y in range(10000) if y%2==0]
 ```
+Less common, but still possible, are dictionary and set comprehensions.
 
 # Iterables and generators
+Iterables is any type over which one can iterate e.g. in a for-loop.
+However, creating a list, like the one given in the [List comprehensions](#list-comprehensions) section, can take up a lot of memory.
+Generators, on the other hand, are iterables which only yield a value just before it is used, hence, using less memory. A generator that is never used, will never produce any values.
+```python
+generator_even_pairs = ((x,y) for x in range(10000) if x%2==0 for y in range(10000) if y%2==0)
+
+def generator_odd_pairs(n):
+    x,y = 1,1
+    while x < n:
+        while y < n:
+            yield x,y
+            y += 2
+        x += 2
+```
+This code will execute immediately as none of the generators will actually produce something, as they were never used.
+But more importantly, the second generator is more than 5.000 times more time-efficient.
+
+```python
+from time import perf_counter
+
+# List comprehension
+tic = perf_counter()
+for x,y in [(x,y) for x in range(10000) if x%2==0 for y in range(10000) if y%2==0]:
+    sum_of_both = x+y
+toc = perf_counter()
+print(toc-tic) # Just over 7 seconds
+
+# Generator with comprehension
+tic = perf_counter()
+for x,y in ((x,y) for x in range(10000) if x%2==0 for y in range(10000) if y%2==0):
+    sum_of_both = x+y
+toc = perf_counter()
+print(toc-tic) # Somewhere around 6 seconds
+
+# Generator with yield
+tic = perf_counter()
+def generator_odd_pairs(n):
+    x,y = 1,1
+    while x < n:
+        while y < n:
+            yield x,y
+            y += 2
+        x += 2
+
+for x,y in generator_odd_pairs(10000):
+    sum_of_both = x+y
+toc = perf_counter()
+print(toc-tic) # Consistently less than 0.0013 seconds
+```
+
+
 
 # args and kwargs, zip and unpacking
 
