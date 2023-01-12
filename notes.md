@@ -2,7 +2,7 @@
 1. [Pythonesk](#pythonesk)
 2. [Automated tests](#automated-tests)
 3. [List comprehensions](#list-comprehensions)
-4. [Iterables and generators]
+4. [Iterables and generators](#iterables-and-generators)
 10. [Other](#other)
 
 
@@ -11,6 +11,10 @@
 ## Type annotation
 
 # Automated tests
+```python
+assert condition, message_in_case_it_is_false
+```
+
 
 # List comprehensions
 
