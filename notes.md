@@ -93,8 +93,8 @@ def generator_odd_pairs(n):
             y += 2
         x += 2
 ```
-This code will execute immediately as none of the generators will actually produce something, as they were never used.
-But more importantly, the second generator is more than 5.000 times more time-efficient.
+This code will execute immediately because none of the generators will actually produce something, as they were never used.
+But more importantly, the second generator is more than 5.000 times more time-efficient than a list.
 
 ```python
 from time import perf_counter
@@ -129,9 +129,8 @@ toc = perf_counter()
 print(toc-tic) # Consistently less than 0.0013 seconds
 ```
 
-
-
 # args and kwargs, zip and unpacking
+
 
 # Regular expressions
 
