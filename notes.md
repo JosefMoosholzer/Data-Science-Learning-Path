@@ -70,8 +70,12 @@ An optional message can be added to the line that will be printed with the Asser
 assert name == "John Doe", f"The name was '{name}' instead"
 ```
 
-
 # List comprehensions
+List comprehensions are an elegant and easy way to create lists on the basis of possibly multiple for-loops and conditions.
+Each loop can access the iterating variables of any preceding loop. Conditions in list comprehensions are written in ternary if-then-else statements, though else statements are not possible in list comprehensions. 
+```python
+even_pairs = [(x,y) for x in range(10000) if x%2==0 for y in range(10000) if y%2==0]
+```
 
 # Iterables and generators
 

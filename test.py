@@ -1,12 +1,11 @@
-from typing import List, Dict, Optional, Callable
-values: List[int] = []
-counts: Dict[str, int] = {"libaries": 1, "imports": 4}
-optional_arg: Optional[float] = None
-
-def twice(repeater: Callable[[str, int], str], s: str) -> str:
-    return repeater(s,2)
-
-def comma_repeater(s: str, n: int) -> str:
-    return ", ".join([s for _ in range(n)])
-
-assert twice(comma_repeater, "type annotation") == "type annotation, type annotations", "HEY"
+from time import perf_counter
+tic1 = perf_counter()
+even_pairs = [(x,y) for x in range(10000) if x%2==0 for y in range(10000) if y%2==0]
+#print(even_pairs)
+toc1 = perf_counter()
+print(toc1-tic1)
+tic2 = perf_counter()
+even_pairs = [(x,y) for x in range(10000) for y in range(10000) if x%2==0 and y%2==0]
+#print(even_pairs)
+toc2 = perf_counter()
+print(toc2-tic2)
