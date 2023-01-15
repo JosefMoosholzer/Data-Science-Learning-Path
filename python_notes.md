@@ -180,7 +180,6 @@ assert not regex.search("c", "dog")
 assert len(regex.split("[ab]", "carbs")) == 3 # Splits at every occasion
 assert regex.sub("[el]", "o", "Hello") == "Hoooo" # Substitutes at every occasion
 ```
-
-
+[More info](https://www.codecademy.com/learn/paths/data-analyst/tracks/dsf-data-wrangling-cleaning-and-tidying/modules/dscp-intro-to-regex/cheatsheet)
 
 # Other
